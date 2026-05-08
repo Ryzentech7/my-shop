@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ryzen Store</title>
+<title>Ryzen Tech</title>
 
 <style>
 
@@ -20,101 +20,80 @@ padding:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-position:sticky;
-top:0;
 }
 
 .logo{
-font-size:28px;
+font-size:40px;
 font-weight:bold;
 color:lime;
 }
 
 nav a{
 color:white;
+margin:0 10px;
 text-decoration:none;
-margin:10px;
-font-size:18px;
+font-size:20px;
 }
 
 .hero{
 text-align:center;
-padding:60px 20px;
+padding:80px 20px;
 background:#1a1a1a;
 }
 
 .hero h1{
-font-size:40px;
+font-size:60px;
+margin:0;
+}
+
+.hero p{
+font-size:25px;
+color:#ccc;
 }
 
 .products{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
-gap:20px;
-padding:30px;
+padding:40px;
 }
 
-.product{
-background:#222;
-width:260px;
+.card{
+background:#1f1f1f;
 padding:20px;
 border-radius:20px;
+width:300px;
 text-align:center;
-transition:0.3s;
 }
 
-.product:hover{
-transform:scale(1.05);
-}
-
-.product img{
+.card img{
 width:100%;
 border-radius:15px;
 }
 
+.card h2{
+font-size:40px;
+}
+
 .price{
-font-size:22px;
+font-size:35px;
 color:lime;
-margin:10px;
+margin:20px 0;
 }
 
 button{
 background:lime;
 border:none;
-padding:12px 20px;
-font-size:18px;
+padding:15px 30px;
+font-size:25px;
 border-radius:10px;
 cursor:pointer;
 }
 
-#cart{
-background:black;
-margin:20px;
-padding:20px;
-border-radius:20px;
-}
-
-input, select{
-width:90%;
-padding:12px;
-margin:10px;
-border:none;
-border-radius:10px;
-font-size:16px;
-}
-
 footer{
-background:#000;
 text-align:center;
 padding:20px;
+background:black;
 margin-top:40px;
-}
-
-.socials a{
-color:lime;
-margin:10px;
-text-decoration:none;
 }
 
 </style>
@@ -123,157 +102,86 @@ text-decoration:none;
 <body>
 
 <header>
-
-<div class="logo">
-RYZEN STORE
-</div>
+<div class="logo">RYZEN TECH</div>
 
 <nav>
 <a href="#">Home</a>
 <a href="#">Products</a>
 <a href="#">Contact</a>
 </nav>
-
 </header>
 
 <section class="hero">
-
-<h1>Welcome To Ryzen Store</h1>
-
-<p>Best Fashion Products Online</p>
-
+<h1>Welcome To Ryzen Tech</h1>
+<p>Gaming & Computer Accessories</p>
 </section>
 
 <section class="products">
 
-<div class="product">
+<div class="card">
 
-<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
 
-<h2>Sport Shoes</h2>
+<h2>Gaming Mouse</h2>
 
-<p class="price">500 EGP</p>
+<div class="price">800 EGP</div>
 
-<button onclick="addToCart('Sport Shoes - 500 EGP')">
+<button onclick="orderNow('Gaming Mouse',800)">
 Add To Cart
 </button>
 
 </div>
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800">
-
-<h2>T-Shirt</h2>
-
-<p class="price">300 EGP</p>
-
-<button onclick="addToCart('T-Shirt - 300 EGP')">
-Add To Cart
-</button>
-
-</div>
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=800">
-
-<h2>Hoodie</h2>
-
-<p class="price">700 EGP</p>
-
-<button onclick="addToCart('Hoodie - 700 EGP')">
-Add To Cart
-</button>
-
-</div>
-
-</section>
-
-<section id="cart">
-
-<h2>Shopping Cart 🛒</h2>
-
-<ul id="cart-items"></ul>
-
-<h3>Checkout</h3>
-
-<input type="text" id="name" placeholder="Your Name">
-
-<input type="text" id="phone" placeholder="Phone Number">
-
-<input type="text" id="address" placeholder="Your Address">
-
-<select id="payment">
-
-<option>Cash On Delivery</option>
-
-<option>Visa</option>
-
-</select>
-
-<br><br>
-
-<button onclick="sendOrder()">
-Place Order
-</button>
 
 </section>
 
 <footer>
-
-<p>© 2026 Ryzen Store</p>
-
-<div class="socials">
-
-<a href="#">Instagram</a>
-
-<a href="#">TikTok</a>
-
-<a href="#">WhatsApp</a>
-
-</div>
-
+Phone: 01070063817
 </footer>
 
-<script>
+<script type="module">
 
-let cart = [];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-function addToCart(product){
+import { getFirestore, collection, addDoc }
 
-cart.push(product);
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-let li = document.createElement("li");
+const firebaseConfig = {
+apiKey: "AIzaSyD3faYreStKWi1Pf8OWgig0nCKZbOYEv5w",
+authDomain: "ryzentech-c33ea.firebaseapp.com",
+projectId: "ryzentech-c33ea",
+storageBucket: "ryzentech-c33ea.firebasestorage.app",
+messagingSenderId: "1056330967257",
+appId: "1:1056330967257:web:778e94f24a08f46348f6c8",
+measurementId: "G-Z3Q4BQYVDE"
+};
 
-li.innerText = product;
+const app = initializeApp(firebaseConfig);
 
-document.getElementById("cart-items").appendChild(li);
+const db = getFirestore(app);
 
+window.orderNow = async function(product, price){
+
+let customer = prompt("Enter Your Name");
+
+let phone = prompt("Enter Your Phone");
+
+if(!customer || !phone){
+alert("Enter all data");
+return;
 }
 
-function sendOrder(){
+await addDoc(collection(db, "orders"), {
 
-let name = document.getElementById("name").value;
+product: product,
+price: price,
+customer: customer,
+phone: phone,
+date: new Date()
 
-let phone = document.getElementById("phone").value;
+});
 
-let address = document.getElementById("address").value;
-
-let payment = document.getElementById("payment").value;
-
-let message =
-"New Order:%0A%0A" +
-"Name: " + name + "%0A" +
-"Phone: " + phone + "%0A" +
-"Address: " + address + "%0A" +
-"Payment: " + payment + "%0A%0A" +
-"Products:%0A" + cart.join("%0A");
-
-window.open(
-"https://wa.me/201070063817?text=" + message,
-"_blank"
-);
+alert("Order Sent Successfully 🔥");
 
 }
 
