@@ -4,628 +4,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ryzen Tech</title>
+<title>RYZENTECH</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
-}
-
 body{
+margin:0;
 font-family:Arial;
 background:#0a0a0f;
 color:white;
-overflow-x:hidden;
 }
 
+/* HEADER */
 header{
 background:#000;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
-border-bottom:1px solid rgba(139,92,246,0.2);
-}
-
-.logo{
-font-size:34px;
-font-weight:bold;
-color:#8b5cf6;
-
-text-shadow:
-0 0 10px rgba(139,92,246,0.5);
-}
-
-nav{
-display:flex;
-gap:20px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-size:18px;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#a855f7;
-}
-
-.hero{
-padding:100px 20px;
-text-align:center;
-background:
-linear-gradient(
-to bottom,
-#111827,
-#0a0a0f
-);
-}
-
-.hero h1{
-
-font-size:60px;
-color:white;
-
-text-shadow:
-0 0 15px rgba(139,92,246,0.4);
-
-}
-
-.hero p{
-margin-top:20px;
-font-size:22px;
-color:#aaa;
-}
-
-.shop-btn{
-margin-top:30px;
-padding:16px 35px;
-border:none;
-border-radius:12px;
-background:#8b5cf6;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-.shop-btn:hover{
-background:#a855f7;
-transform:scale(1.05);
-}
-
-.products{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:35px;
-padding:60px 20px;
-}
-
-.card{
-
-background:#111827;
-
-width:300px;
-
 padding:20px;
-
-border-radius:22px;
-
-transition:0.4s;
-
-border:1px solid rgba(139,92,246,0.2);
-
-box-shadow:
-0 0 15px rgba(139,92,246,0.08);
-
+text-align:center;
+font-size:32px;
+color:#8b5cf6;
+font-weight:bold;
 }
 
-.card:hover{
+/* DESCRIPTION */
+.desc{
+text-align:center;
+color:#aaa;
+padding:10px;
+}
 
-transform:translateY(-8px);
+/* PRODUCTS */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
 
-box-shadow:
-0 0 25px rgba(139,92,246,0.2);
+/* CARD */
+.card{
+background:#111827;
+padding:15px;
+border-radius:15px;
 
+border:2px solid transparent;
+background-image:
+linear-gradient(#111827,#111827),
+linear-gradient(90deg,red,blue,green);
+background-origin:border-box;
+background-clip:padding-box,border-box;
 }
 
 .card img{
 width:100%;
-height:220px;
-object-fit:cover;
-border-radius:15px;
-}
-
-.card h2{
-margin-top:15px;
-font-size:28px;
-}
-
-.desc{
-margin-top:10px;
-color:#aaa;
-line-height:1.5;
+border-radius:10px;
 }
 
 .price{
-margin-top:15px;
-font-size:30px;
-font-weight:bold;
 color:#8b5cf6;
+font-size:20px;
+margin:10px 0;
 }
 
-.qty{
-margin-top:15px;
-width:80px;
-padding:10px;
-font-size:18px;
-border:none;
-border-radius:10px;
-text-align:center;
-background:#1f2937;
-color:white;
-}
-
-button{
-
-margin-top:15px;
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-
-background:#8b5cf6;
-
-font-size:18px;
+/* STOCK */
+.status{
 font-weight:bold;
-cursor:pointer;
+margin:8px 0;
+}
+
+.in{color:#00ff88;}
+.out{color:#ff4d4d;}
+
+/* BUTTON */
+button{
+width:100%;
+padding:10px;
+background:#8b5cf6;
+border:none;
 color:white;
-
-transition:0.3s;
-
+border-radius:10px;
+cursor:pointer;
 }
 
 button:hover{
-
 background:#a855f7;
-transform:scale(1.03);
-
 }
 
+/* CART */
 #cart{
-margin:30px;
-padding:25px;
 background:#111827;
-border-radius:20px;
-border:1px solid rgba(139,92,246,0.2);
+margin:20px;
+padding:20px;
+border-radius:15px;
 }
 
-#cart h2{
-margin-bottom:20px;
-color:#8b5cf6;
-}
-
-.cart-item{
-background:#1f2937;
-padding:12px;
-border-radius:10px;
+input,select{
+width:100%;
+padding:10px;
 margin-top:10px;
-}
-
-#total{
-margin-top:20px;
-font-size:30px;
-color:#8b5cf6;
-}
-
-.checkout{
-margin-top:25px;
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-
-.checkout input,
-.checkout select{
-
-padding:14px;
+border-radius:10px;
 border:none;
-border-radius:12px;
-font-size:16px;
 background:#1f2937;
 color:white;
-
 }
 
-footer{
-
-margin-top:50px;
-
-background:#0d0d12;
-
-padding:40px;
-
-text-align:center;
-
-color:#aaa;
-
-border-top:
-1px solid rgba(139,92,246,0.2);
-
-}
-
-footer h2{
-
+#payinfo{
 color:#8b5cf6;
-
-margin-bottom:10px;
-
-}
-
-footer a{
-
-color:#a855f7;
-
-text-decoration:none;
-
-}
-
-footer a:hover{
-
-color:white;
-
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:40px;
-}
-
-header{
-flex-direction:column;
-gap:15px;
-}
-
-nav{
-flex-wrap:wrap;
-justify-content:center;
-}
-
+margin-top:10px;
+font-weight:bold;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-RYZEN TECH
-</div>
-
-<nav>
-
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#contact">Contact</a>
-
-</nav>
-
+RYZENTECH
 </header>
 
-<section class="hero" id="home">
-
-<h1>Gaming & PC Parts</h1>
-
-<p>
-Professional Gaming Hardware Store
+<p class="desc">
+Computer Hardware & Accessories Store  
+RAM • SSD • Gaming Parts
 </p>
 
-<a href="#products">
-<button class="shop-btn">
-Shop Now
-</button>
-</a>
-
-</section>
-
-<section class="products" id="products">
+<!-- PRODUCTS -->
+<div class="products">
 
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
-
-<h2>Kingston RAM RGB</h2>
-
-<p class="desc">
-High speed DDR4 RGB gaming RAM with ultra performance.
-</p>
-
-<div class="price">
-2200 EGP
-</div>
-
-<input type="number"
-class="qty"
-id="qty1"
-value="1"
-min="1">
-
-<button onclick="addToCart('Kingston RAM RGB',2200,'qty1')">
-Add To Cart
-</button>
-
+<h3>Kingston RAM RGB</h3>
+<p class="status in">In Stock</p>
+<div class="price">2200 EGP</div>
+<button onclick="add('RAM RGB',2200)">Add To Cart</button>
 </div>
 
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
-
-<h2>Samsung SSD 1TB</h2>
-
-<p class="desc">
-Ultra fast NVMe SSD with high read/write speeds.
-</p>
-
-<div class="price">
-4500 EGP
+<h3>Samsung SSD 1TB</h3>
+<p class="status out">Out of Stock</p>
+<div class="price">4500 EGP</div>
+<button onclick="add('SSD 1TB',4500)">Add To Cart</button>
 </div>
-
-<input type="number"
-class="qty"
-id="qty2"
-value="1"
-min="1">
-
-<button onclick="addToCart('Samsung SSD 1TB',4500,'qty2')">
-Add To Cart
-</button>
 
 </div>
 
-</section>
+<!-- CART -->
+<div id="cart">
 
-<section id="cart">
+<h2>Checkout</h2>
 
-<h2>Shopping Cart 🛒</h2>
+<div id="items"></div>
 
-<div id="cart-items"></div>
+<input id="customer" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="address" placeholder="Address">
 
-<h1 id="total">
-Total: 0 EGP
-</h1>
-
-<div class="checkout">
-
-<input type="text"
-id="customer"
-placeholder="Your Name">
-
-<input type="text"
-id="phone"
-placeholder="Phone Number">
-
-<select id="payment">
-
-<option>Cash On Delivery</option>
-
-<option>Visa</option>
-
+<select id="payment" onchange="showPayment()">
+<option>Cash on Delivery</option>
+<option>InstaPay</option>
+<option>Wallet</option>
 </select>
 
-<button onclick="checkout()">
-Checkout
-</button>
+<p id="payinfo"></p>
+
+<button onclick="order()">Place Order</button>
 
 </div>
 
-</section>
-
-<footer id="contact">
-
-<h2>Contact Us</h2>
-
-<br>
-
-<p>
-WhatsApp:
-<a href="https://wa.me/201070063817"
-target="_blank">
-
-01070063817
-
-</a>
-</p>
-
-<br>
-
-<p>
-Telegram:
-<a href="https://t.me/Ryzentech_store_bot"
-target="_blank">
-
-@Ryzentech_store_bot
-
-</a>
-</p>
-
-<br>
-
-<p>
-Email:
-ryzentech@gmail.com
-</p>
-
-<br><br>
-
-<p>
-© 2026 Ryzen Tech
-</p>
-
-</footer>
-
-<script type="module">
-
-import { initializeApp }
-
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-
-import {
-
-getFirestore,
-collection,
-addDoc
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyD3faYreStKWi1Pf8OWgig0nCKZbOYEv5w",
-
-authDomain: "ryzentech-c33ea.firebaseapp.com",
-
-projectId: "ryzentech-c33ea",
-
-storageBucket: "ryzentech-c33ea.firebasestorage.app",
-
-messagingSenderId: "1056330967257",
-
-appId: "1:1056330967257:web:778e94f24a08f46348f6c8",
-
-measurementId: "G-Z3Q4BQYVDE"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
+<script>
 
 let cart = [];
 
-let total = 0;
+// ➕ Add to cart
+function add(name,price){
+cart.push({name,price});
+document.getElementById("items").innerHTML +=
+"<p>"+name+" - "+price+" EGP</p>";
+}
 
-window.addToCart = function(product,price,qtyId){
+// 💳 Payment info
+function showPayment(){
 
-let qty =
-parseInt(document.getElementById(qtyId).value);
+let p = document.getElementById("payment").value;
 
-let finalPrice = price * qty;
-
-cart.push({
-product,
-qty,
-finalPrice
-});
-
-let item =
-document.createElement("div");
-
-item.className = "cart-item";
-
-item.innerText =
-product +
-" x" + qty +
-" = " + finalPrice + " EGP";
-
-document.getElementById("cart-items")
-.appendChild(item);
-
-total += finalPrice;
-
-document.getElementById("total")
-.innerText =
-"Total: " + total + " EGP";
+if(p === "InstaPay"){
+document.getElementById("payinfo").innerText = "Instapay: 01142074413";
+}
+else if(p === "Wallet"){
+document.getElementById("payinfo").innerText = "Wallet: 01142074413";
+}
+else{
+document.getElementById("payinfo").innerText = "";
+}
 
 }
 
-window.checkout = async function(){
+// 🚀 ORDER SYSTEM (FULL FIXED)
+function order(){
 
-let customer =
-document.getElementById("customer").value;
+let name = document.getElementById("customer").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+let payment = document.getElementById("payment").value;
 
-let phone =
-document.getElementById("phone").value;
-
-let payment =
-document.getElementById("payment").value;
-
-if(cart.length == 0){
-
-alert("Cart is empty");
-
+if(cart.length === 0){
+alert("Cart is empty ❗");
 return;
-
 }
 
-await addDoc(collection(db,"orders"),{
+if(name === "" || phone === ""){
+alert("Please fill name and phone ❗");
+return;
+}
 
-customer,
-phone,
-payment,
-cart,
-total,
-date:new Date()
+// 🛒 Items
+let itemsText = cart.map(i =>
+`• ${i.name} - ${i.price} EGP`
+).join("\n");
 
-});
+// 💰 Total
+let total = cart.reduce((sum,i)=>sum+i.price,0);
 
-fetch("https://api.telegram.org/bot8730225866:AAEiFjNPZjWoTYn87lrMNKOWeonhQw271bs/sendMessage",{
+// 🔥 Message
+let message = `
+🔥 NEW ORDER - RYZENTECH
+
+👤 Name: ${name}
+📱 Phone: ${phone}
+📍 Address: ${address}
+
+💳 Payment: ${payment}
+
+🛒 ITEMS:
+${itemsText}
+
+💰 TOTAL: ${total} EGP
+`;
+
+// 📲 Telegram
+fetchfetchfetch("https://api.telegram.org/bot8769220770:AAEe6040gs3Y_Ikesi6jmrsElY_sNQLegHQ/sendMessage", {
 
 method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
+headers:{"Content-Type":"application/json"},
 
 body:JSON.stringify({
-
-chat_id:"7405848304",
-
-text:
-"🔥 New Order\n\n" +
-
-"Customer: " + customer + "\n" +
-
-"Phone: " + phone + "\n" +
-
-"Payment: " + payment + "\n" +
-
-"Total: " + total + " EGP"
-
+chat_id:7405848304
+text:message
 })
 
 });
 
-alert("Order Sent Successfully 🔥");
+alert("Order Sent 🔥");
 
+// 🧹 Reset
 cart = [];
-
-total = 0;
-
-document.getElementById("cart-items")
-.innerHTML = "";
-
-document.getElementById("total")
-.innerText = "Total: 0 EGP";
-
-document.getElementById("customer").value = "";
-
-document.getElementById("phone").value = "";
+document.getElementById("items").innerHTML="";
+document.getElementById("customer").value="";
+document.getElementById("phone").value="";
+document.getElementById("address").value="";
 
 }
 
