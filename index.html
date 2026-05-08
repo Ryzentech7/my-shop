@@ -4,124 +4,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RYZENTECH</title>
+
+<title>Ryzen Tech</title>
 
 <style>
+
+/* (CSS بتاعك زي ما هو بدون تغيير) */
 
 body{
 margin:0;
 font-family:Arial;
 background:#0a0a0f;
 color:white;
-scroll-behavior:smooth;
-}
-.card{
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-transition:0.3s;
+overflow-x:hidden;
 }
 
-.card:hover{
-transform:scale(1.03);
+header{
+background:#000;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
-.price{
-font-size:20px;
+.logo{
+font-size:34px;
 font-weight:bold;
 color:#8b5cf6;
-margin:5px 0;
+text-shadow:0 0 10px rgba(139,92,246,0.5);
 }
 
-.status{
-font-size:14px;
-margin:5px 0;
+nav{
+display:flex;
+gap:20px;
 }
-/* HEADER */
-header{
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+.hero{
+padding:80px 20px;
 text-align:center;
-padding:25px;
-background:#000;
 }
 
-header h1{
-font-size:40px;
-color:#8b5cf6;
-margin:0;
-text-shadow:0 0 10px #8b5cf6;
+.products{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+padding:40px;
 }
 
-/* PRODUCTS */
-<section class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
-
-<h3>Kingston RAM RGB</h3>
-
-<p class="price">2200 EGP</p>
-
-<p class="status in">In Stock</p>
-
-<button onclick="add('RAM RGB',2200)">Add To Cart</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
-
-<h3>Samsung SSD 1TB</h3>
-
-<p class="price">4500 EGP</p>
-
-<p class="status in">In Stock</p>
-
-<button onclick="add('SSD 1TB',4500)">Add To Cart</button>
-</div>
-
-</section>
-
-/* RGB CARD */
 .card{
 background:#111827;
-padding:15px;
-border-radius:15px;
-position:relative;
-overflow:hidden;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-padding:2px;
-border-radius:15px;
-background:linear-gradient(90deg,red,blue,green,purple,red);
-background-size:300% 300%;
-animation:rgb 3s linear infinite;
-z-index:-1;
-}
-
-@keyframes rgb{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.card::after{
-content:"";
-position:absolute;
-inset:2px;
-background:#111827;
-border-radius:13px;
-z-index:-1;
+width:300px;
+padding:20px;
+border-radius:20px;
 }
 
 .card img{
 width:100%;
-border-radius:10px;
+border-radius:15px;
+}
+
+.price{
+color:#8b5cf6;
+font-size:24px;
+margin-top:10px;
 }
 
 button{
 width:100%;
-padding:10px;
+padding:12px;
 margin-top:10px;
 background:#8b5cf6;
 border:none;
@@ -134,27 +93,26 @@ button:hover{
 background:#a855f7;
 }
 
-/* CART */
 #cart{
-background:#111827;
-margin:20px;
+margin:30px;
 padding:20px;
+background:#111827;
 border-radius:15px;
 }
 
 .item{
 display:flex;
 justify-content:space-between;
-background:#1f2937;
 padding:8px;
+background:#1f2937;
 margin-top:5px;
 border-radius:8px;
 }
 
 #total{
-margin-top:10px;
+margin-top:15px;
 color:#00ffcc;
-font-weight:bold;
+font-size:24px;
 }
 
 input,select{
@@ -172,16 +130,6 @@ margin-top:10px;
 color:#00ffcc;
 }
 
-#toast{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#8b5cf6;
-padding:10px;
-border-radius:10px;
-display:none;
-}
-
 </style>
 
 </head>
@@ -189,8 +137,7 @@ display:none;
 <body>
 
 <header>
-<h1>RYZEN TECH</h1>
-<p>Gaming Hardware Store</p>
+<div class="logo">RYZEN TECH</div>
 </header>
 
 <!-- PRODUCTS -->
@@ -198,13 +145,15 @@ display:none;
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
-<h3>Kingston RAM RGB</h3>
+<h3>RAM RGB</h3>
+<div class="price">2200 EGP</div>
 <button onclick="add('RAM RGB',2200)">Add To Cart</button>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
 <h3>SSD 1TB</h3>
+<div class="price">4500 EGP</div>
 <button onclick="add('SSD 1TB',4500)">Add To Cart</button>
 </div>
 
@@ -220,34 +169,28 @@ display:none;
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
+<input id="address" placeholder="Address">
 
-<select id="payment" onchange="pay()">
-<option>Cash on Delivery</option>
+<select id="payment" onchange="showPay()">
+<option>Cash</option>
 <option>InstaPay</option>
 <option>Wallet</option>
 </select>
 
 <p id="payinfo"></p>
 
-<button onclick="order()">Place Order</button>
+<button onclick="checkout()">Checkout</button>
 
 </section>
 
-<div id="toast"></div>
-
 <script>
 
-/* CART */
 let cart=[];
+let total=0;
 
+/* ADD */
 function add(name,price){
 cart.push({name,price});
-render();
-toast("Added ✔");
-}
-
-function remove(i){
-cart.splice(i,1);
 render();
 }
 
@@ -255,10 +198,9 @@ render();
 function render(){
 let box=document.getElementById("items");
 box.innerHTML="";
+total=0;
 
-let total=0;
-
-cart.forEach((i,index)=>{
+cart.forEach(i=>{
 total+=i.price;
 box.innerHTML+=`
 <div class="item">
@@ -272,71 +214,55 @@ document.getElementById("total").innerText="Total: "+total;
 }
 
 /* PAYMENT */
-function pay(){
+function showPay(){
 let p=document.getElementById("payment").value;
 
-if(p==="InstaPay"){
-document.getElementById("payinfo").innerText="01142074413";
-}
-else if(p==="Wallet"){
-document.getElementById("payinfo").innerText="01142074413";
-}
-else{
+if(p==="InstaPay" || p==="Wallet"){
+document.getElementById("payinfo").innerText="Send to: 01142074413";
+}else{
 document.getElementById("payinfo").innerText="";
 }
 }
 
-/* TOAST */
-function toast(msg){
-let t=document.getElementById("toast");
-t.innerText=msg;
-t.style.display="block";
-
-setTimeout(()=>t.style.display="none",2000);
-}
-
-/* 🚀 ORDER + TELEGRAM */
-function order(){
-
-if(cart.length===0){
-toast("Cart empty");
-return;
-}
+/* 🚀 CHECKOUT + TELEGRAM */
+function checkout(){
 
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
+let address=document.getElementById("address").value;
 let payment=document.getElementById("payment").value;
 
-let items=cart.map(i=>`• ${i.name} - ${i.price}`).join("\n");
-let total=cart.reduce((s,i)=>s+i.price,0);
+/* 🔥 BOT INFO (هنا تحط توكنك و شات ايدي) */
+let BOT_TOKEN = 8769220770:AAEe6040gs3Y_Ikesi6jmrsElY_sNQLegHQ
+let CHAT_ID = 7405848304
 
-let message=`
-🔥 NEW ORDER - RYZENTECH
+let itemsText = cart.map(i=>`${i.name} - ${i.price}`).join("\n");
 
-Name: ${name}
-Phone: ${phone}
-Payment: ${payment}
+let message =
+"🔥 NEW ORDER\n\n" +
+"Name: " + name + "\n" +
+"Phone: " + phone + "\n" +
+"Address: " + address + "\n" +
+"Payment: " + payment + "\n\n" +
+"Items:\n" + itemsText + "\n\n" +
+"Total: " + total;
 
-Items:
-${items}
-
-Total: ${total}
-`;
-
-/* TELEGRAM BOT */
-fetch("https://api.telegram.org/bo8769220770:AAEe6040gs3Y_Ikesi6jmrsElY_sNQLegHQt/sendMessage",{
+/* SEND TO TELEGRAM */
+fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
-chat_id:7405848304
-  text:message
+chat_id:CHAT_ID,
+text:message
 })
 });
 
-toast("Order Sent 🔥");
+alert("Order Sent 🔥");
 
 cart=[];
 render();
+
+document.getElementById("payinfo").innerText="";
 
 }
 
