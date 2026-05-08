@@ -15,7 +15,26 @@ background:#0a0a0f;
 color:white;
 scroll-behavior:smooth;
 }
+.card{
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+transition:0.3s;
+}
 
+.card:hover{
+transform:scale(1.03);
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:#8b5cf6;
+margin:5px 0;
+}
+
+.status{
+font-size:14px;
+margin:5px 0;
+}
 /* HEADER */
 header{
 text-align:center;
@@ -31,12 +50,33 @@ text-shadow:0 0 10px #8b5cf6;
 }
 
 /* PRODUCTS */
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-padding:20px;
-}
+<section class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
+
+<h3>Kingston RAM RGB</h3>
+
+<p class="price">2200 EGP</p>
+
+<p class="status in">In Stock</p>
+
+<button onclick="add('RAM RGB',2200)">Add To Cart</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
+
+<h3>Samsung SSD 1TB</h3>
+
+<p class="price">4500 EGP</p>
+
+<p class="status in">In Stock</p>
+
+<button onclick="add('SSD 1TB',4500)">Add To Cart</button>
+</div>
+
+</section>
 
 /* RGB CARD */
 .card{
