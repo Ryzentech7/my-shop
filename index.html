@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ryzen Tech RGB</title>
+<title>Ryzen Tech</title>
 
 <style>
 
@@ -13,42 +13,14 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+scroll-behavior:smooth;
 }
 
 body{
 font-family:Arial;
-background:#050505;
+background:#0a0a0f;
 color:white;
 overflow-x:hidden;
-}
-
-@keyframes rgbGlow{
-
-0%{
-color:red;
-text-shadow:0 0 15px red;
-}
-
-25%{
-color:cyan;
-text-shadow:0 0 15px cyan;
-}
-
-50%{
-color:lime;
-text-shadow:0 0 15px lime;
-}
-
-75%{
-color:magenta;
-text-shadow:0 0 15px magenta;
-}
-
-100%{
-color:red;
-text-shadow:0 0 15px red;
-}
-
 }
 
 header{
@@ -60,41 +32,53 @@ align-items:center;
 position:sticky;
 top:0;
 z-index:1000;
-border-bottom:1px solid #222;
-backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(139,92,246,0.2);
 }
 
 .logo{
 font-size:34px;
 font-weight:bold;
-animation:rgbGlow 4s infinite;
+color:#8b5cf6;
+
+text-shadow:
+0 0 10px rgba(139,92,246,0.5);
+}
+
+nav{
+display:flex;
+gap:20px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin-left:20px;
 font-size:18px;
 transition:0.3s;
 }
 
 nav a:hover{
-color:cyan;
+color:#a855f7;
 }
 
 .hero{
-padding:90px 20px;
+padding:100px 20px;
 text-align:center;
-background:linear-gradient(
+background:
+linear-gradient(
 to bottom,
-#111,
-#050505
+#111827,
+#0a0a0f
 );
 }
 
 .hero h1{
+
 font-size:60px;
-animation:rgbGlow 5s infinite;
+color:white;
+
+text-shadow:
+0 0 15px rgba(139,92,246,0.4);
+
 }
 
 .hero p{
@@ -103,30 +87,58 @@ font-size:22px;
 color:#aaa;
 }
 
+.shop-btn{
+margin-top:30px;
+padding:16px 35px;
+border:none;
+border-radius:12px;
+background:#8b5cf6;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.shop-btn:hover{
+background:#a855f7;
+transform:scale(1.05);
+}
+
 .products{
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
 gap:35px;
-padding:50px 20px;
+padding:60px 20px;
 }
 
 .card{
-background:#121212;
+
+background:#111827;
+
 width:300px;
+
 padding:20px;
+
 border-radius:22px;
+
 transition:0.4s;
+
+border:1px solid rgba(139,92,246,0.2);
+
 box-shadow:
-0 0 10px rgba(255,0,255,0.2),
-0 0 20px rgba(0,255,255,0.1);
+0 0 15px rgba(139,92,246,0.08);
+
 }
 
 .card:hover{
-transform:translateY(-10px);
+
+transform:translateY(-8px);
+
 box-shadow:
-0 0 20px cyan,
-0 0 40px magenta;
+0 0 25px rgba(139,92,246,0.2);
+
 }
 
 .card img{
@@ -149,9 +161,9 @@ line-height:1.5;
 
 .price{
 margin-top:15px;
-font-size:32px;
+font-size:30px;
 font-weight:bold;
-animation:rgbGlow 5s infinite;
+color:#8b5cf6;
 }
 
 .qty{
@@ -162,67 +174,51 @@ font-size:18px;
 border:none;
 border-radius:10px;
 text-align:center;
-background:#1d1d1d;
+background:#1f2937;
 color:white;
 }
 
 button{
+
 margin-top:15px;
 width:100%;
 padding:14px;
 border:none;
 border-radius:12px;
 
-background:linear-gradient(
-45deg,
-red,
-cyan,
-lime,
-magenta
-);
-
-background-size:300% 300%;
-
-animation:rgbButton 5s infinite;
+background:#8b5cf6;
 
 font-size:18px;
 font-weight:bold;
 cursor:pointer;
-color:black;
+color:white;
+
+transition:0.3s;
+
 }
 
-@keyframes rgbButton{
+button:hover{
 
-0%{
-background-position:0% 50%;
-}
-
-50%{
-background-position:100% 50%;
-}
-
-100%{
-background-position:0% 50%;
-}
+background:#a855f7;
+transform:scale(1.03);
 
 }
 
 #cart{
 margin:30px;
 padding:25px;
-background:#101010;
+background:#111827;
 border-radius:20px;
-box-shadow:
-0 0 15px rgba(0,255,255,0.1);
+border:1px solid rgba(139,92,246,0.2);
 }
 
 #cart h2{
 margin-bottom:20px;
-animation:rgbGlow 5s infinite;
+color:#8b5cf6;
 }
 
 .cart-item{
-background:#1b1b1b;
+background:#1f2937;
 padding:12px;
 border-radius:10px;
 margin-top:10px;
@@ -231,7 +227,7 @@ margin-top:10px;
 #total{
 margin-top:20px;
 font-size:30px;
-animation:rgbGlow 5s infinite;
+color:#8b5cf6;
 }
 
 .checkout{
@@ -248,23 +244,54 @@ padding:14px;
 border:none;
 border-radius:12px;
 font-size:16px;
-background:#1a1a1a;
+background:#1f2937;
 color:white;
 
 }
 
 footer{
+
 margin-top:50px;
-background:black;
-padding:25px;
+
+background:#0d0d12;
+
+padding:40px;
+
 text-align:center;
-color:#777;
+
+color:#aaa;
+
+border-top:
+1px solid rgba(139,92,246,0.2);
+
+}
+
+footer h2{
+
+color:#8b5cf6;
+
+margin-bottom:10px;
+
+}
+
+footer a{
+
+color:#a855f7;
+
+text-decoration:none;
+
+}
+
+footer a:hover{
+
+color:white;
+
 }
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:38px;
+font-size:40px;
 }
 
 header{
@@ -273,8 +300,8 @@ gap:15px;
 }
 
 nav{
-display:flex;
-gap:15px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
 }
@@ -287,30 +314,36 @@ gap:15px;
 <header>
 
 <div class="logo">
-RYZEN TECH RGB
+RYZEN TECH
 </div>
 
 <nav>
 
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">Contact</a>
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#contact">Contact</a>
 
 </nav>
 
 </header>
 
-<section class="hero">
+<section class="hero" id="home">
 
-<h1>Gaming & RGB PC Parts</h1>
+<h1>Gaming & PC Parts</h1>
 
 <p>
-Professional RGB Gaming Hardware Store
+Professional Gaming Hardware Store
 </p>
+
+<a href="#products">
+<button class="shop-btn">
+Shop Now
+</button>
+</a>
 
 </section>
 
-<section class="products">
+<section class="products" id="products">
 
 <div class="card">
 
@@ -402,9 +435,46 @@ Checkout
 
 </section>
 
-<footer>
+<footer id="contact">
 
-© 2026 Ryzen Tech RGB
+<h2>Contact Us</h2>
+
+<br>
+
+<p>
+WhatsApp:
+<a href="https://wa.me/201070063817"
+target="_blank">
+
+01070063817
+
+</a>
+</p>
+
+<br>
+
+<p>
+Telegram:
+<a href="https://t.me/Ryzentech_store_bot"
+target="_blank">
+
+@Ryzentech_store_bot
+
+</a>
+</p>
+
+<br>
+
+<p>
+Email:
+ryzentech@gmail.com
+</p>
+
+<br><br>
+
+<p>
+© 2026 Ryzen Tech
+</p>
 
 </footer>
 
