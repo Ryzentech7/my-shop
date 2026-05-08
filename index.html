@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RYZENTECH PRO</title>
+<title>RYZENTECH</title>
 
 <style>
 
@@ -19,7 +19,6 @@ color:white;
 header{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:20px;
 background:#000;
 color:#8b5cf6;
@@ -27,21 +26,10 @@ position:sticky;
 top:0;
 }
 
-nav a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-}
-
-nav a:hover{
-color:#8b5cf6;
-}
-
 /* HERO */
 .hero{
 text-align:center;
-padding:60px;
-background:linear-gradient(#111827,#0a0a0f);
+padding:50px;
 }
 
 /* PRODUCTS */
@@ -52,13 +40,13 @@ gap:20px;
 padding:20px;
 }
 
-/* 🌈 RGB CARD */
+/* 🌈 RGB FRAME ONLY */
 .card{
 background:#111827;
 padding:15px;
 border-radius:15px;
 position:relative;
-z-index:1;
+overflow:hidden;
 }
 
 .card::before{
@@ -69,10 +57,10 @@ left:-2px;
 right:-2px;
 bottom:-2px;
 border-radius:16px;
-background:linear-gradient(90deg, red, blue, green, purple, red);
+background:linear-gradient(90deg,red,blue,green,purple,red);
 background-size:300% 300%;
 z-index:-1;
-animation:rgb 5s linear infinite;
+animation:rgb 4s linear infinite;
 }
 
 @keyframes rgb{
@@ -86,12 +74,8 @@ width:100%;
 border-radius:10px;
 }
 
-.price{
-color:#8b5cf6;
-font-size:20px;
-}
+.price{color:#8b5cf6;}
 
-/* STOCK */
 .in{color:#00ff88;}
 .out{color:#ff4d4d;}
 
@@ -134,11 +118,51 @@ font-weight:bold;
 margin-top:10px;
 }
 
-/* CONTACT */
-#contact{
-text-align:center;
+/* CART ITEMS */
+.item{
+display:flex;
+justify-content:space-between;
+background:#1f2937;
+padding:8px;
+margin-top:5px;
+border-radius:8px;
+}
+
+.remove{
+color:red;
+cursor:pointer;
+}
+
+.qty{
+color:#00ffcc;
+}
+
+/* TOTAL */
+#total{
+margin-top:10px;
+color:#00ffcc;
+font-size:18px;
+}
+
+/* MODAL */
+#modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+align-items:center;
+justify-content:center;
+}
+
+.modal-box{
+background:#111827;
 padding:20px;
-color:#aaa;
+border-radius:10px;
+width:80%;
+text-align:center;
 }
 
 </style>
@@ -148,28 +172,23 @@ color:#aaa;
 <body>
 
 <header>
-<div>RYZENTECH PRO</div>
-<nav>
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#contact">Contact</a>
-</nav>
+<div>RYZENTECH</div>
 </header>
 
-<section class="hero" id="home">
+<section class="hero">
 <h1>Gaming Hardware Store</h1>
 <p>RAM • SSD • Accessories • RGB Parts</p>
 </section>
 
 <!-- PRODUCTS -->
-<section class="products" id="products">
+<section class="products">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
 <h3>Kingston RAM RGB</h3>
 <p class="in">In Stock</p>
 <div class="price">2200 EGP</div>
-<button onclick="add('RAM RGB',2200)">Add To Cart</button>
+<button onclick="add('RAM RGB',2200,true)">Add</button>
 </div>
 
 <div class="card">
@@ -177,7 +196,7 @@ color:#aaa;
 <h3>Samsung SSD 1TB</h3>
 <p class="out">Out of Stock</p>
 <div class="price">4500 EGP</div>
-<button onclick="add('SSD 1TB',4500)">Add To Cart</button>
+<button disabled>Out of Stock</button>
 </div>
 
 </section>
@@ -188,6 +207,8 @@ color:#aaa;
 <h2>Checkout</h2>
 
 <div id="items"></div>
+
+<div id="total">Total: 0 EGP</div>
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
@@ -205,59 +226,109 @@ color:#aaa;
 
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-<h2>Contact Us</h2>
-<p>WhatsApp: 01070063817</p>
-<p>Instagram: @ryzentech</p>
-</section>
+<!-- MODAL -->
+<div id="modal">
+<div class="modal-box">
+<h3>Order Sent ✅</h3>
+<p>We will contact you soon</p>
+<button onclick="closeModal()">OK</button>
+</div>
+</div>
 
 <script>
 
-let cart = [];
+let cart=[];
 
-// ADD TO CART
-function add(name,price){
-cart.push({name,price});
-document.getElementById("items").innerHTML +=
-`<p>${name} - ${price} EGP</p>`;
+/* ADD WITH QTY */
+function add(name,price,stock){
+
+if(!stock){
+alert("Out of Stock ❌");
+return;
 }
 
-// PAYMENT
+let found=cart.find(i=>i.name===name);
+
+if(found){
+found.qty++;
+}else{
+cart.push({name,price,qty:1});
+}
+
+render();
+}
+
+/* REMOVE */
+function remove(i){
+cart.splice(i,1);
+render();
+}
+
+/* RENDER */
+function render(){
+
+let box=document.getElementById("items");
+box.innerHTML="";
+
+cart.forEach((i,index)=>{
+box.innerHTML+=`
+<div class="item">
+<span>${i.name} x${i.qty}</span>
+<span>${i.price*i.qty} EGP</span>
+<span class="remove" onclick="remove(${index})">X</span>
+</div>
+`;
+});
+
+let total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+document.getElementById("total").innerText="Total: "+total+" EGP";
+
+}
+
+/* PAYMENT */
 function showPayment(){
 
 let p=document.getElementById("payment").value;
+let info=document.getElementById("payinfo");
 
 if(p==="InstaPay"){
-document.getElementById("payinfo").innerText="Instapay: 01142074413";
+info.innerText="Instapay: 01142074413";
 }
 else if(p==="Wallet"){
-document.getElementById("payinfo").innerText="Wallet: 01142074413";
+info.innerText="Wallet: 01142074413";
 }
 else{
-document.getElementById("payinfo").innerText="";
+info.innerText="";
 }
 
 }
 
-// ORDER + TELEGRAM
+/* ORDER */
 function order(){
+
+if(cart.length===0){
+alert("Cart is empty");
+return;
+}
 
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
 let address=document.getElementById("address").value;
-let payment=document.getElementById("payment").value;
 
-let items=cart.map(i=>`• ${i.name} - ${i.price} EGP`).join("\n");
-let total=cart.reduce((s,i)=>s+i.price,0);
+if(!name || !phone){
+alert("Fill name and phone");
+return;
+}
+
+let items=cart.map(i=>`• ${i.name} x${i.qty} = ${i.price*i.qty}`).join("\n");
+let total=cart.reduce((s,i)=>s+i.price*i.qty,0);
 
 let message=`
-🔥 NEW ORDER - RYZENTECH PRO
+🔥 NEW ORDER
 
 Name: ${name}
 Phone: ${phone}
 Address: ${address}
-Payment: ${payment}
 
 Items:
 ${items}
@@ -265,7 +336,7 @@ ${items}
 Total: ${total} EGP
 `;
 
-fetch("https://api.telegram.org/bot8769220770:AAEe6040gs3Y_Ikesi6jmrsElY_sNQLegHQ
+fetch("https://api.telegram.org/bot8769220770:AAEe6040gs3Y_Ikesi6jmrsElY_sNQLegHQ/sendMessage",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
@@ -274,10 +345,17 @@ text:message
 })
 });
 
-alert("Order Sent 🔥");
+/* SHOW MODAL */
+document.getElementById("modal").style.display="flex";
 
+/* RESET */
 cart=[];
-document.getElementById("items").innerHTML="";
+render();
+
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
 </script>
