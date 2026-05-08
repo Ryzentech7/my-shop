@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ryzen Tech</title>
 
 <style>
 
-body{
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
 font-family:Arial;
-background:#0d0d0d;
+background:#0b0b0b;
 color:white;
 }
 
 header{
 background:#000;
-padding:20px;
+padding:20px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 position:sticky;
 top:0;
-z-index:100;
+z-index:1000;
+border-bottom:1px solid #1f1f1f;
 }
 
 .logo{
-font-size:35px;
+font-size:32px;
 font-weight:bold;
 color:lime;
 }
@@ -34,126 +42,170 @@ color:lime;
 nav a{
 color:white;
 text-decoration:none;
-margin:0 15px;
+margin-left:20px;
 font-size:18px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:lime;
 }
 
 .hero{
-text-align:center;
 padding:80px 20px;
-background:#111;
+text-align:center;
+background:linear-gradient(to bottom,#101010,#0b0b0b);
 }
 
 .hero h1{
-font-size:50px;
-margin:0;
+font-size:55px;
+margin-bottom:20px;
 }
 
 .hero p{
-color:#aaa;
-font-size:20px;
+font-size:22px;
+color:#999;
 }
 
 .products{
 display:flex;
 justify-content:center;
-gap:25px;
-padding:40px;
 flex-wrap:wrap;
+gap:30px;
+padding:50px 20px;
 }
 
-.product{
-background:#161616;
+.card{
+background:#151515;
+width:300px;
 padding:20px;
 border-radius:20px;
-width:280px;
-text-align:center;
 transition:0.3s;
-box-shadow:0 0 15px rgba(0,255,0,0.1);
+box-shadow:0 0 20px rgba(0,255,0,0.08);
 }
 
-.product:hover{
-transform:translateY(-5px);
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(0,255,0,0.2);
 }
 
-.product img{
+.card img{
 width:100%;
 height:220px;
 object-fit:cover;
 border-radius:15px;
 }
 
-.product h2{
+.card h2{
 margin-top:15px;
+font-size:28px;
 }
 
 .desc{
-color:#aaa;
-font-size:14px;
 margin-top:10px;
+color:#aaa;
+line-height:1.5;
 }
 
 .price{
-font-size:28px;
+margin-top:15px;
+font-size:30px;
 color:lime;
-margin:15px 0;
+font-weight:bold;
 }
 
 .qty{
-width:70px;
+margin-top:15px;
+width:80px;
 padding:10px;
+font-size:18px;
 border:none;
 border-radius:10px;
-font-size:18px;
 text-align:center;
 }
 
 button{
-background:lime;
-border:none;
-padding:12px 25px;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
 margin-top:15px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:lime;
+font-size:18px;
 font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#00cc00;
 }
 
 #cart{
-background:#111;
-margin:20px;
+margin:30px;
 padding:25px;
+background:#121212;
 border-radius:20px;
 }
 
-.cart-item{
-background:#1a1a1a;
-padding:12px;
-margin:10px 0;
-border-radius:10px;
+#cart h2{
+margin-bottom:20px;
 }
 
-input, select{
-width:95%;
+.cart-item{
+background:#1d1d1d;
 padding:12px;
-margin-top:10px;
-border:none;
 border-radius:10px;
-font-size:16px;
+margin-top:10px;
 }
 
 #total{
+margin-top:20px;
 font-size:28px;
 color:lime;
-margin-top:15px;
+}
+
+.checkout{
+margin-top:25px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.checkout input,
+.checkout select{
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:16px;
+background:#1b1b1b;
+color:white;
 }
 
 footer{
-background:#000;
-padding:20px;
+margin-top:50px;
+background:black;
+padding:25px;
 text-align:center;
-margin-top:40px;
 color:#777;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
+}
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+nav{
+display:flex;
+gap:15px;
+}
+
 }
 
 </style>
@@ -179,23 +231,27 @@ RYZEN TECH
 
 <h1>Gaming & PC Parts</h1>
 
-<p>Best SSDs, RAMs & Computer Accessories</p>
+<p>
+Professional Computer Hardware Store
+</p>
 
 </section>
 
 <section class="products">
 
-<div class="product">
+<div class="card">
 
 <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
 
 <h2>Kingston RAM 16GB</h2>
 
 <p class="desc">
-DDR4 High Performance Gaming RAM
+High speed DDR4 gaming RAM for smooth performance.
 </p>
 
-<div class="price">2200 EGP</div>
+<div class="price">
+2200 EGP
+</div>
 
 <input type="number"
 class="qty"
@@ -203,33 +259,31 @@ id="qty1"
 value="1"
 min="1">
 
-<br>
-
 <button onclick="addToCart('Kingston RAM 16GB',2200,'qty1')">
 Add To Cart
 </button>
 
 </div>
 
-<div class="product">
+<div class="card">
 
 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
 
 <h2>Samsung SSD 1TB</h2>
 
 <p class="desc">
-Ultra Fast NVMe SSD Storage
+Ultra fast NVMe SSD with high read/write speeds.
 </p>
 
-<div class="price">4500 EGP</div>
+<div class="price">
+4500 EGP
+</div>
 
 <input type="number"
 class="qty"
 id="qty2"
 value="1"
 min="1">
-
-<br>
 
 <button onclick="addToCart('Samsung SSD 1TB',4500,'qty2')">
 Add To Cart
@@ -245,9 +299,11 @@ Add To Cart
 
 <div id="cart-items"></div>
 
-<h2 id="total">
+<h1 id="total">
 Total: 0 EGP
-</h2>
+</h1>
+
+<div class="checkout">
 
 <input type="text"
 id="customer"
@@ -269,11 +325,13 @@ placeholder="Phone Number">
 Checkout
 </button>
 
+</div>
+
 </section>
 
 <footer>
 
-© 2026 Ryzen Tech
+© 2026 Ryzen Tech - All Rights Reserved
 
 </footer>
 
@@ -284,9 +342,11 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
+
 getFirestore,
 collection,
 addDoc
+
 }
 
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
@@ -317,7 +377,7 @@ let cart = [];
 
 let total = 0;
 
-window.addToCart = function(product, price, qtyId){
+window.addToCart = function(product,price,qtyId){
 
 let qty =
 parseInt(document.getElementById(qtyId).value);
@@ -330,16 +390,18 @@ qty,
 finalPrice
 });
 
-let div = document.createElement("div");
+let item =
+document.createElement("div");
 
-div.className = "cart-item";
+item.className = "cart-item";
 
-div.innerText =
-product + " x" + qty +
+item.innerText =
+product +
+" x" + qty +
 " = " + finalPrice + " EGP";
 
 document.getElementById("cart-items")
-.appendChild(div);
+.appendChild(item);
 
 total += finalPrice;
 
@@ -361,31 +423,66 @@ let payment =
 document.getElementById("payment").value;
 
 if(cart.length == 0){
+
 alert("Cart is empty");
+
 return;
+
 }
 
-await addDoc(collection(db, "orders"), {
+await addDoc(collection(db,"orders"),{
 
 customer,
 phone,
 payment,
 cart,
 total,
-date: new Date()
+date:new Date()
 
 });
 
-alert("Order Saved Successfully 🔥");
+fetch("https://api.telegram.org/bot8730225866:AAEiFjNPZjWoTYn87lrMNKOWeonhQw271bs/sendMessage",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+chat_id:"7405848304",
+
+text:
+"🔥 New Order\n\n" +
+
+"Customer: " + customer + "\n" +
+
+"Phone: " + phone + "\n" +
+
+"Payment: " + payment + "\n" +
+
+"Total: " + total + " EGP"
+
+})
+
+});
+
+alert("Order Sent Successfully 🔥");
 
 cart = [];
+
+total = 0;
 
 document.getElementById("cart-items")
 .innerHTML = "";
 
 document.getElementById("total")
-.innerText =
-"Total: 0 EGP";
+.innerText = "Total: 0 EGP";
+
+document.getElementById("customer").value = "";
+
+document.getElementById("phone").value = "";
 
 }
 
