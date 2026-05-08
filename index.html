@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ryzen Tech</title>
+<title>Ryzen Tech RGB</title>
 
 <style>
 
@@ -17,8 +17,38 @@ box-sizing:border-box;
 
 body{
 font-family:Arial;
-background:#0b0b0b;
+background:#050505;
 color:white;
+overflow-x:hidden;
+}
+
+@keyframes rgbGlow{
+
+0%{
+color:red;
+text-shadow:0 0 15px red;
+}
+
+25%{
+color:cyan;
+text-shadow:0 0 15px cyan;
+}
+
+50%{
+color:lime;
+text-shadow:0 0 15px lime;
+}
+
+75%{
+color:magenta;
+text-shadow:0 0 15px magenta;
+}
+
+100%{
+color:red;
+text-shadow:0 0 15px red;
+}
+
 }
 
 header{
@@ -30,13 +60,14 @@ align-items:center;
 position:sticky;
 top:0;
 z-index:1000;
-border-bottom:1px solid #1f1f1f;
+border-bottom:1px solid #222;
+backdrop-filter:blur(10px);
 }
 
 .logo{
-font-size:32px;
+font-size:34px;
 font-weight:bold;
-color:lime;
+animation:rgbGlow 4s infinite;
 }
 
 nav a{
@@ -48,45 +79,54 @@ transition:0.3s;
 }
 
 nav a:hover{
-color:lime;
+color:cyan;
 }
 
 .hero{
-padding:80px 20px;
+padding:90px 20px;
 text-align:center;
-background:linear-gradient(to bottom,#101010,#0b0b0b);
+background:linear-gradient(
+to bottom,
+#111,
+#050505
+);
 }
 
 .hero h1{
-font-size:55px;
-margin-bottom:20px;
+font-size:60px;
+animation:rgbGlow 5s infinite;
 }
 
 .hero p{
+margin-top:20px;
 font-size:22px;
-color:#999;
+color:#aaa;
 }
 
 .products{
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
-gap:30px;
+gap:35px;
 padding:50px 20px;
 }
 
 .card{
-background:#151515;
+background:#121212;
 width:300px;
 padding:20px;
-border-radius:20px;
-transition:0.3s;
-box-shadow:0 0 20px rgba(0,255,0,0.08);
+border-radius:22px;
+transition:0.4s;
+box-shadow:
+0 0 10px rgba(255,0,255,0.2),
+0 0 20px rgba(0,255,255,0.1);
 }
 
 .card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px rgba(0,255,0,0.2);
+transform:translateY(-10px);
+box-shadow:
+0 0 20px cyan,
+0 0 40px magenta;
 }
 
 .card img{
@@ -109,9 +149,9 @@ line-height:1.5;
 
 .price{
 margin-top:15px;
-font-size:30px;
-color:lime;
+font-size:32px;
 font-weight:bold;
+animation:rgbGlow 5s infinite;
 }
 
 .qty{
@@ -122,6 +162,8 @@ font-size:18px;
 border:none;
 border-radius:10px;
 text-align:center;
+background:#1d1d1d;
+color:white;
 }
 
 button{
@@ -130,30 +172,57 @@ width:100%;
 padding:14px;
 border:none;
 border-radius:12px;
-background:lime;
+
+background:linear-gradient(
+45deg,
+red,
+cyan,
+lime,
+magenta
+);
+
+background-size:300% 300%;
+
+animation:rgbButton 5s infinite;
+
 font-size:18px;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
+color:black;
 }
 
-button:hover{
-background:#00cc00;
+@keyframes rgbButton{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
 }
 
 #cart{
 margin:30px;
 padding:25px;
-background:#121212;
+background:#101010;
 border-radius:20px;
+box-shadow:
+0 0 15px rgba(0,255,255,0.1);
 }
 
 #cart h2{
 margin-bottom:20px;
+animation:rgbGlow 5s infinite;
 }
 
 .cart-item{
-background:#1d1d1d;
+background:#1b1b1b;
 padding:12px;
 border-radius:10px;
 margin-top:10px;
@@ -161,8 +230,8 @@ margin-top:10px;
 
 #total{
 margin-top:20px;
-font-size:28px;
-color:lime;
+font-size:30px;
+animation:rgbGlow 5s infinite;
 }
 
 .checkout{
@@ -174,12 +243,14 @@ gap:15px;
 
 .checkout input,
 .checkout select{
+
 padding:14px;
 border:none;
 border-radius:12px;
 font-size:16px;
-background:#1b1b1b;
+background:#1a1a1a;
 color:white;
+
 }
 
 footer{
@@ -216,23 +287,25 @@ gap:15px;
 <header>
 
 <div class="logo">
-RYZEN TECH
+RYZEN TECH RGB
 </div>
 
 <nav>
+
 <a href="#">Home</a>
 <a href="#">Products</a>
 <a href="#">Contact</a>
+
 </nav>
 
 </header>
 
 <section class="hero">
 
-<h1>Gaming & PC Parts</h1>
+<h1>Gaming & RGB PC Parts</h1>
 
 <p>
-Professional Computer Hardware Store
+Professional RGB Gaming Hardware Store
 </p>
 
 </section>
@@ -243,10 +316,10 @@ Professional Computer Hardware Store
 
 <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
 
-<h2>Kingston RAM 16GB</h2>
+<h2>Kingston RAM RGB</h2>
 
 <p class="desc">
-High speed DDR4 gaming RAM for smooth performance.
+High speed DDR4 RGB gaming RAM with ultra performance.
 </p>
 
 <div class="price">
@@ -259,7 +332,7 @@ id="qty1"
 value="1"
 min="1">
 
-<button onclick="addToCart('Kingston RAM 16GB',2200,'qty1')">
+<button onclick="addToCart('Kingston RAM RGB',2200,'qty1')">
 Add To Cart
 </button>
 
@@ -331,7 +404,7 @@ Checkout
 
 <footer>
 
-© 2026 Ryzen Tech - All Rights Reserved
+© 2026 Ryzen Tech RGB
 
 </footer>
 
