@@ -1,27 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RYZEN TECH Products</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#0a0a0f;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+.product{
+    background:#1a1a1a;
+    padding:15px;
+    margin:15px 0;
+    border-radius:10px;
+}
+
+button{
+    padding:10px;
+    background:#25D366;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:disabled{
+    background:gray;
+}
+a{
+    color:#00aaff;
+    text-decoration:none;
+}
+</style>
+
+</head>
+
+<body>
+
 <h1>RYZEN TECH Products</h1>
 
-<div>
-  <h3>RAM 16GB - 1200 EGP</h3>
-  <button onclick="addToCart('RAM 16GB', 1200)">Add</button>
+<!-- PRODUCT 1 -->
+<div class="product">
+    <h3>RAM 16GB - 1200 EGP</h3>
+    <p style="color:lime;">🟢 In Stock</p>
+    <button onclick="addToCart('RAM 16GB', 1200)">Add to Cart</button>
 </div>
 
-<div>
-  <h3>SSD 512GB - 900 EGP</h3>
-  <button onclick="addToCart('SSD 512GB', 900)">Add</button>
+<!-- PRODUCT 2 -->
+<div class="product">
+    <h3>SSD 512GB - 900 EGP</h3>
+    <p style="color:red;">🔴 Out of Stock</p>
+    <button disabled>Out of Stock</button>
 </div>
 
+<!-- CART LINK -->
 <br>
-
-<a href="cart.html">Go to Cart 🛒</a>
+<a href="cart.html">🛒 Go to Cart</a>
 
 <script>
 function addToCart(name, price) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.push({name, price});
+    cart.push({ name, price });
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    alert("Added to cart ✅");
+    alert("Added to cart ✔");
 }
 </script>
+
+</body>
+</html>
