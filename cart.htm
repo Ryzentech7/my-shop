@@ -24,3 +24,22 @@ cart.forEach(item => {
 
 document.getElementById("total").innerText = total;
 </script>
+<a id="orderBtn" href="#" target="_blank">Send Order on WhatsApp</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let text = "My Order:%0A";
+
+let total = 0;
+
+cart.forEach(item => {
+    text += "- " + item.name + " : " + item.price + "%0A";
+    total += item.price;
+});
+
+text += "%0ATotal: " + total + " EGP";
+
+document.getElementById("orderBtn").href =
+"https://wa.me/201070063817?text=" + text;
+</script>
