@@ -1,6 +1,27 @@
 <h1>RYZEN TECH Products</h1>
 
-<p>RAM 16GB - 1200 EGP</p>
-<p>SSD 512GB - 900 EGP</p>
+<div>
+  <h3>RAM 16GB - 1200 EGP</h3>
+  <button onclick="addToCart('RAM 16GB', 1200)">Add</button>
+</div>
 
-<a href="https://wa.me/201070063817">Order on WhatsApp</a>
+<div>
+  <h3>SSD 512GB - 900 EGP</h3>
+  <button onclick="addToCart('SSD 512GB', 900)">Add</button>
+</div>
+
+<br>
+
+<a href="cart.html">Go to Cart 🛒</a>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({name, price});
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Added to cart ✅");
+}
+</script>
